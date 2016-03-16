@@ -31,7 +31,7 @@ def sqwav(freq,duration='half period',offset=0,name='',scale=1,xlim='auto'):
     if duration>=1000/freq:
         print "Pulse duration exeeds frequency!" 
     if xlim=='auto':
-        xlim=duration*3.5
+        xlim=1000/(freq*2)*3.5
     starting_points=np.linspace(-1000,2000,freq*3+1)+offset #define the starting point
     ending_points=[]
     for i in starting_points:
