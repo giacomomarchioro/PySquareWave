@@ -10,15 +10,15 @@ import numpy as np
 
 
 
-def sqwav(freq,duration='half period',offset=0,name='',scale=1,xlim='auto'):
+def sqwav(freq,duration='half period',x_offset=0,name='',amplitude=1,xlim='auto',y_offset=0):
 
     """Plot a square wave.
 
     Keyword arguments:
     freq -- The frequency of the wave in Hz
     duration -- The duration of the signal in milliseconds (default is half period)
-    offset -- the starting time of the first wave in milliseconds (default is 0)
-    scale -- The amplitude of the wave (default is 0)
+    x_offset -- the starting time of the first wave in milliseconds (default is 0)
+    amplitued -- The amplitude of the wave (default is 1)
     name -- A name to be written in the label
     xlim -- set the x axis limit in ms (default is auto).
     
@@ -32,7 +32,7 @@ def sqwav(freq,duration='half period',offset=0,name='',scale=1,xlim='auto'):
         print "Pulse duration exeeds frequency!" 
     if xlim=='auto':
         xlim=1000/(freq*2)*3.5
-    starting_points=np.linspace(-1000,2000,freq*3+1)+offset #define the starting point
+    starting_points=np.linspace(-1000,2000,freq*3+1)+x_offset #define the starting point
     ending_points=[]
     for i in starting_points:
         ending_points.append(i+duration)
@@ -40,7 +40,7 @@ def sqwav(freq,duration='half period',offset=0,name='',scale=1,xlim='auto'):
     #repeat the same point twice e.g. [0,0,1,1,2,2]
     zero=np.zeros(len(x)/4)
     one=np.ones(len(x)/4)
-    y=np.vstack([zero,one,one,zero,]).ravel('F')*scale
+    y=np.vstack([zero,one,one,zero,]).ravel('F')*amplitude+y_offset
     plt.plot(x,y,label='%s %s Hz, duration: %s ms' %(name,freq,duration))
     plt.xlim(0,xlim)
     plt.ylim(-0.2,1.2)
@@ -59,6 +59,9 @@ if __name__ == "__main__":
     offsets=[0,23,0]
     a= zip(freq,durations,offsets,names)
     scale=1
+    y_offset=0
     for i in a:
-         sqwav(i[0],i[1],i[2],i[3],scale = scale)
-         scale-=0.2
+         sqwav(i[0],i[1],i[2],i[3],y_offset = y_offset)
+         y_offset+=1.5
+    plt.yticks(np.arange(0.5, y_offset, 1.5),names)
+    plt.ylim(-0.2,y_offset)
