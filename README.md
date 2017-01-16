@@ -22,5 +22,6 @@ Out[4]:
          1.,  0.,  0.,  1.,  1.,  0.,  0.,  1.,  1.,  0.,  0.,  1.,  1.,  0.]))
 
 ```
+A more elaborated example is shown by defult if the script is run as main:
 
 ![GitHub Logo](https://github.com/giacomomarchioro/PySquareWave/blob/master/Example.png)
