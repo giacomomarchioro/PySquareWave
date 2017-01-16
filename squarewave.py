@@ -10,7 +10,7 @@ import numpy as np
 
 
 
-def sqwav(freq,duration='half period',x_offset=0,name='',amplitude=1,xlim='auto',y_offset=0):
+def sqwav(freq,duration='half period',x_offset=0,name='',amplitude=1,xlim='auto',y_offset=0,plot=False):
 
     """Plot a square wave.
 
@@ -31,7 +31,7 @@ def sqwav(freq,duration='half period',x_offset=0,name='',amplitude=1,xlim='auto'
     if duration>=1000/freq:
         print "Pulse duration exeeds frequency!" 
     if xlim=='auto':
-        xlim=1000/(freq*2)*3.5
+        xlim=1000/(freq*2)*4
     starting_points=np.linspace(-1000,2000,freq*3+1)+x_offset #define the starting point
     ending_points=[]
     for i in starting_points:
@@ -41,11 +41,12 @@ def sqwav(freq,duration='half period',x_offset=0,name='',amplitude=1,xlim='auto'
     zero=np.zeros(len(x)/4)
     one=np.ones(len(x)/4)
     y=np.vstack([zero,one,one,zero,]).ravel('F')*amplitude+y_offset
-    plt.plot(x,y,label='%s %s Hz, duration: %s ms' %(name,freq,duration))
-    plt.xlim(0,xlim)
-    plt.ylim(-0.2,1.2)
-    plt.xlabel('(ms)')
-    plt.legend(fontsize='small')
+    if plot:
+        plt.plot(x,y,label='%s %s Hz, duration: %s ms' %(name,freq,duration))
+        plt.xlim(0,xlim)
+        plt.ylim(-0.2,1.2)
+        plt.xlabel('(ms)')
+        plt.legend(fontsize='small')
     return x,y
 
 if __name__ == "__main__":
@@ -61,7 +62,8 @@ if __name__ == "__main__":
     scale=1
     y_offset=0
     for i in a:
-         sqwav(i[0],i[1],i[2],i[3],y_offset = y_offset)
+         sqwav(i[0],i[1],i[2],i[3],y_offset = y_offset,plot=True)
          y_offset+=1.5
     plt.yticks(np.arange(0.5, y_offset, 1.5),names)
     plt.ylim(-0.2,y_offset)
+
