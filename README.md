@@ -23,4 +23,4 @@ Out[4]:
 
 ```
 
-![GitHub Logo](C:\Users\OPdaTe\Desktop\output.png)
+![GitHub Logo](https://github.com/giacomomarchioro/PySquareWave/blob/master/Example.png)
