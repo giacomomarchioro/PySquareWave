@@ -4,7 +4,6 @@ Created on Tue Mar 15 17:00:02 2016
 Script written to plot ideal square waves.
 @author: Giacomo Marchioro
 """
-from __future__ import division
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -27,11 +26,11 @@ def sqwav(freq,duration='half period',x_offset=0,name='',amplitude=1,xlim='auto'
     
 
     if duration=='half period':
-        duration=1000/(freq*2)#The duration is set to default to half the period
+        duration=1000/(freq*2.)#The duration is set to default to half the period
     if duration>=1000/freq:
         print "Pulse duration exeeds frequency!" 
     if xlim=='auto':
-        xlim=1000/(freq*2)*4
+        xlim=1000/(freq*2.)*4
     starting_points=np.linspace(-1000,2000,freq*3+1)+x_offset #define the starting point
     ending_points=[]
     for i in starting_points:
