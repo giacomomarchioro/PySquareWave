@@ -6,7 +6,8 @@ Script written to plot ideal square waves.
 """
 import matplotlib.pyplot as plt
 import numpy as np
-
+from __future__ import print_function
+from __future__ import division 
 
 
 def sqwav(freq,duration='half period',x_offset=0,name='',amplitude=1,xlim='auto',y_offset=0,plot=False):
@@ -37,8 +38,8 @@ def sqwav(freq,duration='half period',x_offset=0,name='',amplitude=1,xlim='auto'
         ending_points.append(i+duration)
     x=np.vstack([starting_points,starting_points,ending_points,ending_points]).ravel('F')
     #repeat the same point twice e.g. [0,0,1,1,2,2]
-    zero=np.zeros(len(x)/4)
-    one=np.ones(len(x)/4)
+    zero=np.zeros(len(x)//4)
+    one=np.ones(len(x)//4)
     y=np.vstack([zero,one,one,zero,]).ravel('F')*amplitude+y_offset
     if plot:
         plt.plot(x,y,label='%s %s Hz, duration: %s ms' %(name,freq,duration))
